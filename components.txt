@@ -1,0 +1,8 @@
+1- sign up 
+2- log in
+3- home
+4- receip details
+5- favourites
+6- contact us
+7- search 
+8- search results 
