@@ -3,18 +3,24 @@ import axios from "axios";
 
 export const signupThunk = createAsyncThunk(
     'auth/signup',
-    async (userdata) => {
-        const url = import.meta.env.VITE_API_URL
+    async (userdata, thunkAPI) => {
+        const url = import.meta.env.VITE_APP_SERVER_URL
+        console.log(url)
 
-        const response = await axios.post(`${url}login`, {
-            name: userdata.name,
-            email: userdata.email,
-            password: userdata.password,
-        }, {
-            withCredentials: true
-        })
-
-        return response.data
+        try {
+            const res = await axios.post(`${url}signup`, {
+                name: userdata.name,
+                email: userdata.email,
+                password: userdata.password,
+            }, {
+                withCredentials: true
+            });
+            return res.data;
+        } catch (error) {
+            return thunkAPI.rejectWithValue(
+                error.response?.data?.message || "Signup failed"
+            );
+        }
     }
 )
 
@@ -36,7 +42,8 @@ const signupSlice = createSlice(
             })
             builder.addCase(signupThunk.rejected, (state, action) => {
                 state.loading = false;
-                state.error = action.error.message
+                console.log(action.payload)
+                state.error = action.payload || action.error.message;
             })
         }
     }
