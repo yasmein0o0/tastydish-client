@@ -1,15 +1,16 @@
 import { BlogHeader } from "./header";
 import { Content } from "./content";
-import { Similarities } from "../similar";
 import { Subscribe } from "../subscribe";
 import { Footer } from "../footer";
+import { MoreRecipes } from "../similar";
+import "../../style/blog.scss";
 
 export const Blog = () => {
   return (
-    <div id="Blog">
+    <div id="blog">
       <BlogHeader></BlogHeader>
       <Content></Content>
-      <Similarities />
+      <MoreRecipes />
       <Subscribe />
       <Footer />
     </div>
