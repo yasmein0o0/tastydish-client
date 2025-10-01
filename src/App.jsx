@@ -1,35 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Signup } from "./components/signup";
+import { Home } from "./components/home/home";
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import { Login } from "./components/login";
+import { Blog } from "./components/good_chief/blog";
+import { Contact } from "./components/Contact";
+import { Header } from "./components/header";
+import { Recipe } from "./components/recipe/recipe_page";
+import { SearchPage } from "./components/search_page";
+import "./style/root.scss";
+import { Account } from "./components/account";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <BrowserRouter>
+      <Header />
+      <Routes>
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/recipes" element={<SearchPage />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route index element={<Home />} />
+        <Route path="/dish/:id" element={<Recipe />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/account" element={<Account />} />
+        <Route path="*" element={<h1>page not found</h1>} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
