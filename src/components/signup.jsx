@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import { formValidation } from "../../utils/signupValidation";
-import { signupThunk } from "../../redux/signup";
+import { formValidation } from "../utils/signupValidation";
+import { signupThunk } from "../redux/signup";
 import { useNavigate } from "react-router-dom";
+import "../style/signup.scss";
 
 export const Signup = () => {
   const [form, setForm] = useState({
@@ -41,70 +42,81 @@ export const Signup = () => {
   };
 
   return (
-    <div id="form-container">
-      <form method="post" id="signup-form" onSubmit={handleSubmit}>
-        <label htmlFor="name">
-          {(errors.name && errors.name) || "enter your name"}
-        </label>
-        <input
-          type="text"
-          name="name"
-          id="name-input"
-          placeholder="Name"
-          required
-          onChange={handleChange}
-          value={form.name}
-          disabled={loading}
-        />
+    <div id="signup-container">
+      <div id="signup">
+        <form method="post" id="signup-form" onSubmit={handleSubmit}>
+          <h1>sign up</h1>
+          <label htmlFor="name" className={errors.name ? "label-error" : ""}>
+            {(errors.name && errors.name) || "enter your name"}
+          </label>
+          <input
+            type="text"
+            name="name"
+            id="name-input"
+            placeholder="Name"
+            required
+            onChange={handleChange}
+            value={form.name}
+            disabled={loading}
+          />
 
-        <label htmlFor="email">
-          {(errors.email && errors.email) || "enter your email"}
-        </label>
-        <input
-          type="email"
-          name="email"
-          id="email-input"
-          placeholder="email"
-          required
-          onChange={handleChange}
-          value={form.email}
-          disabled={loading}
-        />
+          <label className={errors.email ? "label-error" : ""} htmlFor="email">
+            {(errors.email && errors.email) || "enter your email"}
+          </label>
+          <input
+            type="email"
+            name="email"
+            id="email-input"
+            placeholder="email"
+            required
+            onChange={handleChange}
+            value={form.email}
+            disabled={loading}
+          />
 
-        <label htmlFor="password">
-          {(errors.password && errors.password) || "enter strong password"}
-        </label>
-        <input
-          type="password"
-          name="password"
-          id="password-input"
-          placeholder="password"
-          required
-          onChange={handleChange}
-          value={form.password}
-          disabled={loading}
-        />
+          <label
+            className={errors.password ? "label-error" : ""}
+            htmlFor="password"
+          >
+            {(errors.password && errors.password) || "enter strong password"}
+          </label>
+          <input
+            type="password"
+            name="password"
+            id="password-input"
+            placeholder="password"
+            required
+            onChange={handleChange}
+            value={form.password}
+            disabled={loading}
+          />
 
-        <label htmlFor="c_password">
-          {(errors.c_password && errors.c_password) || "confirm your password"}
-        </label>
-        <input
-          type="password"
-          name="c_password"
-          id="c-password-input"
-          placeholder="confirm password"
-          required
-          onChange={handleChange}
-          value={form.c_password}
-          disabled={loading}
-        />
+          <label
+            className={errors.c_password ? "label-error" : ""}
+            htmlFor="c_password"
+          >
+            {(errors.c_password && errors.c_password) ||
+              "confirm your password"}
+          </label>
+          <input
+            type="password"
+            name="c_password"
+            id="c-password-input"
+            placeholder="confirm password"
+            required
+            onChange={handleChange}
+            value={form.c_password}
+            disabled={loading}
+          />
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Signing Up..." : "Sign Up"} {/* Show loading text */}
+          <button type="submit" disabled={loading}>
+            {loading ? "Signing Up..." : "Sign Up"} {/* Show loading text */}
+          </button>
+        </form>
+        <button onClick={() => navigate("/login")}>
+          already have an account <span>log in</span>
         </button>
-      </form>
-      <p>or</p>
-      <button onClick={() => navigate("/login")}>log in</button>
+      </div>
     </div>
   );
 };
