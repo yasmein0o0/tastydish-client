@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { extractMainIngredient } from "../../../utils/dataExtraction";
+import { extractMainIngredient } from "../../utils/dataExtraction";
 import "../../style/more_recipes.scss";
 import img1 from "../../assets/ForkKnife.png";
 import img2 from "../../assets/Timer.png";
@@ -22,7 +22,11 @@ export const MoreRecipes = () => {
               <div className="more-dish-details">
                 <div className="more-dish-time">
                   <img src={img2} alt="" className="details-icon" />
-                  {elem.total_time_tier.display_tier}
+                  {elem.total_time_tier?.display_tier
+                    ? elem.total_time_tier.display_tier
+                        .replace("Under ", "")
+                        .trim()
+                    : "N/A"}
                 </div>
                 <div className="more-dish-type">
                   <img src={img1} alt="" className="details-icon" />

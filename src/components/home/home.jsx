@@ -3,20 +3,26 @@ import { FeaturedReceip } from "./hot_reciep";
 import { SimpleDishs } from "./simple_recipes";
 import { Instagram } from "./instagram";
 import { LearnMore } from "./learn_more";
-import { MoreRecipes } from "./more_recipes";
+import { MoreRecipes } from "../similar";
 import { Subscribe } from "../subscribe";
 import { Footer } from "../footer";
-import { useDispatch } from "react-redux";
-import { homeThunk } from "../../../redux/home";
-import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { homeThunk } from "../../redux/home";
+import { useEffect, useRef } from "react";
 import "../../style/home.scss";
+// import { useAuthCheck } from "../../../utils/useAuthCheck";
 
 export const Home = () => {
   const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.home);
+  const hasRequested = useRef(false);
 
   useEffect(() => {
-    dispatch(homeThunk());
-  });
+    if (!data && !hasRequested.current) {
+      hasRequested.current = true;
+      dispatch(homeThunk());
+    }
+  }, [dispatch, data]);
   return (
     <div id="home-container">
       <FeaturedReceip></FeaturedReceip>

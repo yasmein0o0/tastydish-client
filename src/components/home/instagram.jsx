@@ -20,10 +20,15 @@ export const Instagram = () => {
         <img src={post4} alt="" className="insta-image" />
       </div>
       <div id="insta-btn">
-        <button>
+        <a
+          href="https://www.instagram.com/foodieland/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="instagram-link"
+        >
           visit our instagram
           <img src="" alt="" />
-        </button>
+        </a>
       </div>
     </div>
   );

@@ -1,10 +1,16 @@
-import { useSelector } from "react-redux";
-import { extractMainIngredient } from "../../../utils/dataExtraction";
+import { useDispatch, useSelector } from "react-redux";
+import { extractMainIngredient } from "../../utils/dataExtraction";
 import ad from "../../assets/Ads.png";
 import img1 from "../../assets/ForkKnife.png";
 import img2 from "../../assets/Timer.png";
+import { dishClick } from "../../utils/dishClick";
+import { useNavigate } from "react-router-dom";
 export const SimpleDishs = () => {
   const { data, loading, error } = useSelector((state) => state.home);
+  const recipe = useSelector((state) => state.recipe);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   if (data) {
     return (
       <div id="simple-dishs-container">
@@ -19,7 +25,13 @@ export const SimpleDishs = () => {
 
         <div id="simple-dishes">
           {data.results.slice(0, 8).map((elem) => (
-            <div className="dish" key={elem.id}>
+            <div
+              className="dish"
+              key={elem.id}
+              onClick={() =>
+                dishClick(recipe.loading, navigate, dispatch, elem.id)
+              }
+            >
               <img
                 src={elem.thumbnail_url}
                 alt={elem.name}
@@ -29,7 +41,11 @@ export const SimpleDishs = () => {
               <div className="dish-details">
                 <div className="dish-time">
                   <img src={img2} alt="" className="details-icon" />
-                  {elem.total_time_tier.display_tier}
+                  {elem.total_time_tier?.display_tier
+                    ? elem.total_time_tier.display_tier
+                        .replace("Under ", "")
+                        .trim()
+                    : "N/A"}
                 </div>
                 <div className="dish-type">
                   <img src={img1} alt="" className="details-icon" />

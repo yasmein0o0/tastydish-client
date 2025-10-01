@@ -1,5 +1,7 @@
+import { useNavigate } from "react-router-dom";
 import img from "../../assets/portrait-happy-male-chef-dressed-uniform 1.png";
 export const LearnMore = () => {
+  const navigate = useNavigate();
   return (
     <div id="learn-container">
       <div id="learn-text">
@@ -8,7 +10,7 @@ export const LearnMore = () => {
           everyone can be a chief in their own kitchen everyone can be a chief
           in their own kitchen everyone can be a chief in their own kitchen
         </p>
-        <button>learn more</button>
+        <button onClick={() => navigate("/blog")}>learn more</button>
       </div>
 
       <div id="learn-image">
