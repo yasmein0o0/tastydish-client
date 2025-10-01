@@ -1,24 +1,52 @@
-export const Similarities = ({ header }) => {
-  const data = [];
-  return (
-    <div id="similarities-container">
-      <h1>{header}</h1>
-      <div id="similar-dishes">
-        {data.forEach((element, index) => {
-          return (
-            <div className="similar-dish" key={index}>
-              <img src={element.thumbnail_url} alt="" />
-              <div className="more-dish-name">{element.name}</div>
+import { useDispatch, useSelector } from "react-redux";
+import { extractMainIngredient } from "../utils/dataExtraction";
+import "../style/more_recipes.scss";
+import img1 from "../assets/ForkKnife.png";
+import img2 from "../assets/Timer.png";
+import { dishClick } from "../utils/dishClick";
+import { useNavigate } from "react-router-dom";
+export const MoreRecipes = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { data, loading, error } = useSelector((state) => state.home);
+  const recipe = useSelector((state) => state.recipe);
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+  if (data) {
+    return (
+      <div id="more-recipes-container">
+        <div id="more-text">
+          <h2>Try this delicious recipe to make your day</h2>
+        </div>
+        <div id="more-recipes-cards">
+          {data.results.slice(9, 17).map((elem) => (
+            <div
+              className="more-dish"
+              key={elem.id}
+              onClick={() =>
+                dishClick(recipe.loading, navigate, dispatch, elem.id)
+              }
+            >
+              <img src={elem.thumbnail_url} alt="" className="more-dish-pic" />
+              <div className="more-dish-name">{elem.name}</div>
               <div className="more-dish-details">
-                <div id="more-dish-time">
-                  {element.total_time_tier.display_tier}
+                <div className="more-dish-time">
+                  <img src={img2} alt="" className="details-icon" />
+                  {elem.total_time_tier?.display_tier
+                    ? elem.total_time_tier.display_tier
+                        .replace("Under ", "")
+                        .trim()
+                    : "N/A"}
                 </div>
-                <div id="more-dish-type">####</div>
+                <div className="more-dish-type">
+                  <img src={img1} alt="" className="details-icon" />
+                  {extractMainIngredient(elem)}{" "}
+                </div>
               </div>
             </div>
-          );
-        })}
+          ))}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
