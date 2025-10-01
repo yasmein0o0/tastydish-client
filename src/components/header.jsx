@@ -1,39 +1,36 @@
-import React, { useState } from "react";
+// components/Header/Header.jsx
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useAuthCheck } from "../utils/useAuthCheck";
 import logo from "../assets/Foodieland..png";
 import "../style/header.scss";
 import img1 from "../assets/001-facebook.png";
 import img2 from "../assets/004-instagram.png";
 import img3 from "../assets/003-twitter.png";
+import { Autocomplete } from "./searchbar";
 
 export const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { hasToken } = useAuthCheck();
   const location = useLocation();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
+  // Close menu when route changes
+  useEffect(() => {
+    console.log(hasToken);
+    closeMenu();
+  }, [location, hasToken]);
 
   return (
     <header id="header">
       <div className="container">
-        <Link to="/" id="logo">
-          <img src={logo} alt="" />
+        <Link to="/" id="logo" onClick={closeMenu}>
+          <img src={logo} alt="Foodieland" />
         </Link>
 
-        <div id="search-container">
-          <input
-            type="search"
-            name="search"
-            id="search"
-            placeholder="search for a dish..."
-          />
-          <button type="submit">search</button>
-        </div>
+        {/* <Autocomplete /> */}
 
         <nav className={`nav ${isMenuOpen ? "nav-open" : ""}`}>
           <Link
@@ -41,8 +38,9 @@ export const Header = () => {
             className={`nav-link ${location.pathname === "/" ? "active" : ""}`}
             onClick={closeMenu}
           >
-            home
+            Home
           </Link>
+
           <Link
             to="/recipes"
             className={`nav-link ${
@@ -50,26 +48,19 @@ export const Header = () => {
             }`}
             onClick={closeMenu}
           >
-            recipes
+            Recipes
           </Link>
+
           <Link
-            to="/categories"
+            to="/blog"
             className={`nav-link ${
-              location.pathname === "/categories" ? "active" : ""
+              location.pathname === "/blog" ? "active" : ""
             }`}
             onClick={closeMenu}
           >
-            blog
+            Blog
           </Link>
-          <Link
-            to="/about"
-            className={`nav-link ${
-              location.pathname === "/about" ? "active" : ""
-            }`}
-            onClick={closeMenu}
-          >
-            about
-          </Link>
+
           <Link
             to="/contact"
             className={`nav-link ${
@@ -77,8 +68,30 @@ export const Header = () => {
             }`}
             onClick={closeMenu}
           >
-            contact
+            Contact
           </Link>
+
+          {hasToken ? (
+            <Link
+              to="/account"
+              className={`nav-link ${
+                location.pathname === "/account" ? "active" : ""
+              }`}
+              onClick={closeMenu}
+            >
+              Account
+            </Link>
+          ) : (
+            <Link
+              to="/login"
+              className={`nav-link ${
+                location.pathname === "/login" ? "active" : ""
+              }`}
+              onClick={closeMenu}
+            >
+              Login
+            </Link>
+          )}
         </nav>
 
         <div className="social-media-container">
@@ -100,6 +113,17 @@ export const Header = () => {
             <img src={img2} alt="" />
           </a>
         </div>
+
+        {/* Mobile menu toggle */}
+        <button
+          className={`menu-toggle ${isMenuOpen ? "open" : ""}`}
+          onClick={toggleMenu}
+          aria-label="Toggle navigation menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </div>
     </header>
   );
