@@ -1,8 +1,8 @@
 
 const getMainIngredientFromName = (name) => {
     const commonIngredients = [
-        'chicken', 'potato', 'leek', 'beef', 'fish', 'pasta',
-        'rice', 'salmon', 'shrimp', 'vegetable', 'cheese', 'egg', 'cookies', 'cake', 'dessert', 'pancackes', 'milkshake'
+        'chicken', 'potato', 'leek', 'beef', 'fish', 'pasta', 'noodles', 'soup',
+        'rice', 'spaghetti', 'salmon', 'shrimp', 'vegetable', 'cheese', 'cheesecake', 'cinnamon', 'salad', 'egg', 'cookies', 'cake', 'dessert', 'pancackes', 'milkshake', 'pie'
     ];
 
     const words = name.toLowerCase().split(' ');
