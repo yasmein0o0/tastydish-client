@@ -1,0 +1,645 @@
+@import "./main_props.scss";
+#recipe-page{
+    margin-top: 90px;
+    width: 1200px;
+    max-width: 100%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: row wrap;
+
+    #overview-continer{
+        width: 100%;
+        #overview-header{
+            width: 100%;
+            #overview-text{
+                width:100%;
+                display: flex;
+                flex-flow: row wrap;
+                position: relative;
+                h1{
+                    width: 100%;
+                    margin: 50px 0 30px;
+                    font-size: 50px;
+                    font-weight: 600;
+                    text-transform: capitalize;
+                }
+
+                #favourite{
+                  position: absolute;
+                  top: 30%;
+                  right: 5px;
+                  width: 70px;
+                  height: 70px;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  border-radius: 10px;
+                  background-color: $main_light_blue;
+                  #img-container{
+                    overflow: hidden;
+                    cursor: pointer;
+                    svg {
+                      width: 38px;
+                      height: 38px;
+                      color: #fff;
+                      transition: color 0.3s ease;
+                    }
+
+                    .faved{
+                      color: red;
+                    }
+                
+                    svg:hover {
+                     color: rgb(255, 113, 113)
+                    }
+                  }
+                }
+
+                #time-type-details{
+                    display: flex;
+                    flex-flow: row ;
+                    margin-bottom: 40px;
+                    #prep-time, #cook-time, #type{
+                        display: flex;
+                        flex-flow: row;
+                        align-items: center;
+                        justify-content: center;
+                        img{
+                            width: 25px;
+                            margin-right: 15px;
+                        }
+                        div{
+                            margin-right: 60px;
+                            display: flex;
+                            flex-flow: column;
+                            span:first-of-type{
+                                margin-bottom: 13px;
+                                text-transform: uppercase;
+                            }
+
+                            span:last-of-type{
+                                color: #00000086;
+                            }
+                        }
+                    }
+
+                }
+
+                #time-type-details #type div span{
+                   margin-bottom: 0px !important;   
+                   color: #000 !important;  
+                }
+            }
+        }
+        #dish-image-info{
+            width: 100%;
+            display: flex;
+            flex-flow:  row wrap;
+            align-items: center;
+            justify-content: space-between;
+            #image-section{
+                width: 65%;
+                height: 550px;
+                border-radius: 30px;
+                overflow: hidden;
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+
+            #dish-info{
+                width: 30%;
+                height: 550px;
+                padding: 25px;
+                background-color: $main_light_blue;
+                border-radius: 30px;
+
+                h2{
+                    font-size: 24px;
+
+                    text-transform: capitalize;
+                }
+                .info-details{
+                    padding: 22px 0;
+                    border-bottom: 1px solid #5858584b;
+                    display: flex;
+                    justify-content: space-between;
+                    text-transform: capitalize;
+                }
+
+                p{
+                    width:100%;
+                    text-align: center;
+                    font-size: 16px;
+                    color: #00000086;
+                    margin-top: 20px;
+                }
+            }
+            p{
+                margin-top: 60px;
+                color: #000000b1;
+                font-size: 20px;
+            }
+        }
+    }
+
+    #main-details{
+        margin-top: 60px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        #directions-ingrid-container{
+            width: 65%;
+              .ingredients-title, .directions-title {
+                color: #2c3e50;
+                font-size: 1.8rem;
+                font-weight: 700;
+                margin-bottom: 1.5rem;
+                position: relative;
+                padding-bottom: 0.5rem;
+              }
+              
+              .directions-title {
+                margin-top: 60px;
+              }
+              
+              .ingredients-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+              }
+              
+              .ingredient-item, .direction-step {
+                display: flex;
+                align-items: center;
+                padding: 1rem 1.5rem;
+                margin-bottom: 0.8rem;
+                background: white;
+                transition: all 0.3s ease;
+                border-bottom: 1px solid #c2c2c286;
+              }
+              
+              .ingredient-item:hover, .direction-step:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+                border-radius: 12px;
+              }
+              
+              .ingredient-checkbox, .direction-checkbox {
+                margin-right: 1rem;
+                position: relative;
+              }
+              
+              .ingredient-checkbox input[type="checkbox"], .direction-checkbox input[type="checkbox"] {
+                display: none;
+              }
+              
+              .ingredient-checkbox label, .direction-checkbox label {
+                width: 22px;
+                height: 22px;
+                border: 2px solid #ddd;
+                border-radius: 6px;
+                display: inline-block;
+                cursor: pointer;
+                position: relative;
+                transition: all 0.3s ease;
+              }
+              
+              .ingredient-checkbox input[type="checkbox"]:checked + label, 
+              .direction-checkbox input[type="checkbox"]:checked + label {
+                background: #2c3e50;
+                border-color: $main_light_blue;
+              }
+              
+              .ingredient-checkbox input[type="checkbox"]:checked + label::after, 
+              .direction-checkbox input[type="checkbox"]:checked + label::after{
+                content: '✓';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                color: white;
+                font-weight: bold;
+                font-size: 12px;
+              }
+              
+              .ingredient-text, .step-text {
+                flex: 1;
+                color: #2c3e50;
+                font-size: 1.1rem;
+                font-weight: 500;
+                line-height: 1.5;
+                transition: all 0.3s ease;
+              }
+        }
+
+        #sidebar{
+          // background-color: #000;
+          width: 30%;
+          display: flex;
+          flex-flow: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          padding-right: 10px;
+
+          h1{
+            text-transform: capitalize;
+          }
+
+          .sidebar-element{
+            width: 100%;
+            margin-top: 30px;
+            display: flex;
+            flex-flow: row;
+
+            img{
+              width: 50%;
+              height: 120px;
+              border-radius: 20px;
+            }
+
+            .sidebar-text{
+              width: 50%;
+              padding: 10px 0 20px 12px;
+              display: flex;
+              flex-flow: column;
+              align-items: flex-start;
+              justify-content: space-between;
+            }
+
+            h2{
+              font-size: 18px;
+            }
+            p{
+              font-size: 14px;
+              color: #0000009d;
+            }
+          }
+
+          #ad{
+            width: 100%;
+            padding: 20px 20px 20px 0;
+            img{
+              width: 100%;
+            }
+          }
+        }
+    }
+
+    
+}
+
+#loading-page{
+  @include loading-container();
+  
+.loader {
+  @include loader()
+  }
+}
+/* RESPONSIVE DESIGN - MATCHING SASS SPECIFICITY */
+@media (max-width: 1200px) {
+  #recipe-page{
+    width: 95%;
+    margin-top: 80px;
+    
+    #overview-continer #overview-header #overview-text h1{
+      font-size: 42px;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  #recipe-page{
+    margin-top: 70px;
+    
+    #overview-continer #overview-header #overview-text{
+      h1{
+        font-size: 36px;
+        margin: 40px 0 25px;
+        padding-right: 80px;
+      }
+      
+      #favourite{
+        width: 60px;
+        height: 60px;
+        top: 25%;
+        
+        #img-container svg{
+          width: 32px;
+          height: 32px;
+        }
+      }
+      
+      #time-type-details{
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 30px;
+        
+        #prep-time div,
+        #cook-time div,
+        #type div{
+          margin-right: 40px;
+        }
+      }
+    }
+
+    #overview-continer{
+    
+    #dish-image-info{
+      flex-direction: column;
+      
+      #image-section{
+        width: 100%;
+        height: 400px;
+        margin-bottom: 30px;
+      }
+      
+      #dish-info{
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  #main-details{
+    flex-direction: column;
+    
+    #directions-ingrid-container{
+      width: 100%;
+      order: 1;
+    }
+    
+    #sidebar{
+      width: 100%;
+      order: 2;
+      margin-top: 40px;
+      padding-right: 0;
+    }
+  }
+  }
+}
+
+@media (max-width: 768px) {
+  #recipe-page{
+    margin-top: 60px;
+    padding: 8px;
+    
+    #overview-continer #overview-header #overview-text{
+      h1{
+        font-size: 32px;
+        margin: 30px 0 20px;
+        padding-right: 70px;
+      }
+      
+      #favourite{
+        width: 55px;
+        height: 55px;
+        top: 20%;
+        
+        #img-container svg{
+          width: 28px;
+          height: 28px;
+        }
+      }
+      
+      #time-type-details{
+        flex-direction: column;
+        gap: 15px;
+        
+        #prep-time,
+        #cook-time,
+        #type{
+          justify-content: flex-start;
+        }
+      }
+    }
+    
+    #dish-image-info{
+      #image-section{
+        height: 350px;
+        border-radius: 20px;
+      }
+      
+      #dish-info{
+        border-radius: 20px;
+        padding: 20px;
+        
+        h2{
+          font-size: 20px;
+        }
+        
+        .info-details{
+          padding: 18px 0;
+        }
+      }
+    }
+  }
+  
+  #main-details #directions-ingrid-container{
+    .ingredients-title,
+    .directions-title{
+      font-size: 1.5rem;
+    }
+    
+    .ingredient-item,
+    .direction-step{
+      padding: 0.8rem 1rem;
+    }
+    
+    .ingredient-text,
+    .step-text{
+      font-size: 1rem;
+    }
+  }
+  
+  #main-details #sidebar{
+    .sidebar-element{
+      flex-direction: column;
+      
+      img{
+        width: 100%;
+        height: 150px;
+        margin-bottom: 10px;
+      }
+      
+      .sidebar-text{
+        width: 100%;
+        padding: 0;
+      }
+    }
+    
+    #ad{
+      padding: 20px 0;
+    }
+  }
+}
+
+/* ADDED RESPONSIVE DESIGN - MAINTAINING SASS SPECIFICITY */
+@media (max-width: 576px) {
+  #recipe-page{
+    margin-top: 50px;
+    padding: 4px;
+    
+    #overview-continer #overview-header #overview-text{
+      h1{
+        font-size: 28px;
+        margin: 20px 0 15px;
+        padding-right: 60px;
+        line-height: 1.2;
+      }
+      
+      #favourite{
+        width: 50px;
+        height: 50px;
+        top: 15%;
+        right: 10px;
+        
+        #img-container svg{
+          width: 24px;
+          height: 24px;
+        }
+      }
+      
+      #time-type-details{
+        gap: 12px;
+        margin-bottom: 20px;
+        
+        #prep-time div,
+        #cook-time div,
+        #type div{
+          margin-right: 20px;
+          font-size: 14px;
+        }
+      }
+    }
+    
+    #dish-image-info{
+      #image-section{
+        height: 250px;
+        border-radius: 15px;
+      }
+      
+      #dish-info{
+        border-radius: 15px;
+        padding: 15px;
+        
+        h2{
+          font-size: 18px;
+          margin-bottom: 15px;
+        }
+        
+        .info-details{
+          padding: 12px 0;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  
+  #main-details #directions-ingrid-container{
+    .ingredients-title,
+    .directions-title{
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+    }
+    
+    .ingredient-item,
+    .direction-step{
+      padding: 0.6rem 0.8rem;
+      margin-bottom: 8px;
+    }
+    
+    .ingredient-text,
+    .step-text{
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    
+    .step-number{
+      min-width: 30px;
+      height: 30px;
+      font-size: 14px;
+    }
+  }
+  
+  #main-details #sidebar{
+    margin-bottom: 30px;
+    
+    .sidebar-element{
+      margin-bottom: 20px;
+      
+      img{
+        height: 120px;
+        margin-bottom: 8px;
+      }
+      
+      .sidebar-text{
+        h3{
+          font-size: 16px;
+        }
+        
+        p{
+          font-size: 14px;
+        }
+      }
+    }
+    
+    #ad{
+      padding: 15px 0;
+      font-size: 14px;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  #recipe-page{
+    margin-top: 45px;
+    
+    #overview-continer #overview-header #overview-text{
+      h1{
+        font-size: 24px;
+        padding-right: 50px;
+      }
+      
+      #favourite{
+        width: 45px;
+        height: 45px;
+        
+        #img-container svg{
+          width: 20px;
+          height: 20px;
+        }
+      }
+      
+      #time-type-details{
+        #prep-time div,
+        #cook-time div,
+        #type div{
+          margin-right: 15px;
+          font-size: 12px;
+        }
+      }
+    }
+    
+    #dish-image-info{
+      #image-section{
+        height: 200px;
+      }
+    }
+  }
+  
+  #main-details #directions-ingrid-container{
+    .ingredients-title,
+    .directions-title{
+      font-size: 1.2rem;
+    }
+    
+    .ingredient-text,
+    .step-text{
+      font-size: 0.85rem;
+    }
+  }
+}

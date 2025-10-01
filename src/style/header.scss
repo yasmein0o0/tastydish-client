@@ -1,80 +1,462 @@
 #header {
-    width: 1400px;
+  width: 1200px;
   max-width: 100%;
-border-bottom: 1px solid #52525236;
+  border-bottom: 1px solid #52525236;
   position: fixed;
   z-index: 1000;
   background-color: #fff;
+  
   .container {
     width: 100%;
     display: flex;
     flex-flow: row;
     align-items: center;
+    justify-content: space-between;
     padding: 10px;
+    
     #logo {
       height: 100%;
     }
 
-    #search-container {
-        position: relative;
+    .search-container {
+      position: relative;
       width: 420px;
-      max-width: 80%;
+      max-width: 70%;
       display: flex;
       flex-flow: row;
       align-self: center;
       justify-content: space-between;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      padding: 7px 7px 7px 10px;
-      border-radius: 10px;
-      height: 50px;
-      margin-left: 7%;
-      #search {
-        border: none;
-        outline: none;
-        width: 300px;
-        font-size: 1rem;
-      }
-      button{
-        height: 100%;
-        width: 100px;
-        outline: none;
-        border: none;
-        background-color: #000;
-        color: #fff;
-        font-size: .9rem;
+      margin-left: 4%;
+      
+      .autocomplete-form{
+        position: relative;
+        width: 100%;
+        display: flex;
+        flex-flow: row;
+        align-self: center;
+        justify-content: space-between;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 7px 7px 7px 10px;
         border-radius: 10px;
-        cursor: pointer;
-        text-transform: capitalize;
+        height: 55px;
+        
+        input {
+          border: none;
+          outline: none;
+          width: 300px;
+          font-size: 1rem;
+        }
+        
+        button{
+          height: 100%;
+          width: 100px;
+          outline: none;
+          border: none;
+          background-color: #000;
+          color: #fff;
+          font-size: .9rem;
+          border-radius: 10px;
+          cursor: pointer;
+          text-transform: capitalize;
+        }
+
+        button:disabled{
+          background-color: #0000009b;
+        }
       }
 
-      button:hover{
-        background-color: #000000d3;
+      .suggestions-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-top: 4px;
+        max-height: 200px;
+        overflow-y: auto;
+      }
+      
+      .suggestion-item {
+        padding: 12px;
+        cursor: pointer;
+        border-bottom: 1px solid #eee;
+      }
+      
+      .suggestion-item:hover {
+        background-color: #f0f0f0;
+      }
+      
+      .suggestion-item:last-child {
+        border-bottom: none;
+      }
+
+      .loading {
+        color: #666;
+        font-style: italic;
+      }
+      
+      .error {
+        color: red;
+      }
+      
+      .no-results {
+        color: #888;
+        font-style: italic;
       }
     }
 
     nav{
-        padding: 5px 10px;
-        margin-left: 7%;
-        .nav-link{
-            text-decoration: none;
-            color: #000;
-            font-size: 1.3rem;
-            margin-right: 2rem;
-            padding-bottom: 3px;
-            text-transform: capitalize !important;
-        }
+      padding: 5px;
+      
+      .nav-link{
+        text-decoration: none;
+        color: #000;
+        font-size: 1.3rem;
+        font-weight: 400;
+        margin-right: 1.8rem;
+        padding-bottom: 3px;
+        text-transform: capitalize !important;
+        transition: all 0.2s ease;
+      }
 
-        a:hover{
-          border-bottom: 1px solid #000000d3;
-        }
+      a:hover{
+        border-bottom: 1px solid #000000d3;
+      }
     }
 
     .social-media-container{
-        position: absolute;
-        right: 10px;
-        a{
-            margin-right: 20px;
+      right: 10px;
+      
+      a{
+        margin-right: 20px;
+      }
+    }
+    
+    /* Menu Toggle Button */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      z-index: 1001;
+      
+      span {
+        display: block;
+        width: 25px;
+        height: 3px;
+        background: #000;
+        margin: 2px 0;
+        transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        transform-origin: center;
+      }
+      
+      &.open {
+        span:nth-child(1) {
+          transform: rotate(45deg) translate(5px, 5px);
         }
+        
+        span:nth-child(2) {
+          opacity: 0;
+          transform: scaleX(0);
+        }
+        
+        span:nth-child(3) {
+          transform: rotate(-45deg) translate(6px, -6px);
+        }
+      }
     }
   }
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 1200px) {
+  #header {
+    width: 95%;
+    
+    .container {
+      nav {
+        margin-left: 3%;
+        
+        .nav-link {
+          font-size: 1.1rem;
+          margin-right: 1rem;
+        }
+      }
+      
+      .search-container {
+        width: 380px;
+        margin-left: 3%;
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  #header .container {
+    flex-wrap: wrap;
+    position: relative;
+    padding: 8px;
+    
+    #logo {
+      order: 1;
+    }
+    
+    .search-container {
+      order: 3;
+      width: 100%;
+      max-width: 100%;
+      margin: 15px 0 0 0;
+      
+      .autocomplete-form {
+        height: 50px;
+        
+        input {
+          width: 70%;
+        }
+        
+        button {
+          width: 25%;
+        }
+      }
+    }
+    
+    nav {
+      order: 2;
+      margin-left: auto;
+      margin-right: 50px;
+    }
+    
+    .social-media-container {
+      display: none;
+    }
+    
+    .menu-toggle {
+      display: flex;
+      order: 2;
+    }
+  }
+}
+
+/* Backdrop overlay */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@media (max-width: 768px) {
+  #header .container {
+    #logo img {
+      height: 18px;
+    }
+    
+    .search-container .autocomplete-form {
+      height: 45px;
+      padding: 5px 5px 5px 8px;
+      
+      input {
+        font-size: 0.9rem;
+        width: 65%;
+      }
+      
+      button {
+        font-size: 0.85rem;
+        width: 30%;
+      }
+    }
+    
+    nav {
+      display: flex;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: white;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 20px;
+      
+      /* Initial state - hidden */
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-20px);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      /* Menu items animation */
+      .nav-link {
+        margin: 15px 0;
+        font-size: 1.4rem;
+        text-align: center;
+        padding: 10px 20px;
+        width: 100%;
+        max-width: 200px;
+        
+        /* Initial state for menu items */
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+        transition-delay: 0.1s;
+        
+        &:nth-child(1) { transition-delay: 0.1s; }
+        &:nth-child(2) { transition-delay: 0.15s; }
+        &:nth-child(3) { transition-delay: 0.2s; }
+        &:nth-child(4) { transition-delay: 0.25s; }
+        &:nth-child(5) { transition-delay: 0.3s; }
+        &:nth-child(6) { transition-delay: 0.35s; }
+        
+        &:hover {
+          background-color: #f5f5f5;
+          border-radius: 8px;
+          border-bottom: none;
+          transform: translateY(-2px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+      }
+      
+      /* Open state */
+      &.nav-open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        
+        .nav-link {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+    
+    .menu-toggle {
+      margin-left: 15px;
+      z-index: 1001;
+      
+      &.open {
+        position: fixed;
+        right: 20px;
+        top: 20px;
+        transition: all 0.3s ease;
+        
+        span {
+          background: #333;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  #header .container {
+    padding: 6px;
+    
+    #logo img {
+      height: 16px;
+    }
+    
+    .search-container .autocomplete-form {
+      height: 42px;
+      
+      input {
+        font-size: 0.85rem;
+        width: 60%;
+        padding-left: 8px;
+      }
+      
+      button {
+        font-size: 0.8rem;
+        width: 35%;
+      }
+    }
+    
+    .menu-toggle {
+      margin-left: 10px;
+      
+      span {
+        width: 22px;
+        height: 2px;
+        margin: 3px 0;
+      }
+      
+      &.open {
+        right: 15px;
+        top: 15px;
+      }
+    }
+    
+    nav {
+      padding: 15px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      .nav-link {
+        font-size: 1.2rem;
+        margin: 12px 0;
+        padding: 12px 16px;
+        transition: all 0.25s ease;
+        
+        &:hover {
+          transform: translateY(-1px);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  #header .container {
+    .search-container .autocomplete-form {
+      height: 40px;
+      
+      input {
+        font-size: 0.8rem;
+      }
+      
+      button {
+        font-size: 0.75rem;
+      }
+    }
+    
+    .menu-toggle {
+      span {
+        width: 20px;
+      }
+      
+      &.open {
+        right: 10px;
+        top: 10px;
+      }
+    }
+    
+    nav {
+      padding: 10px;
+      
+      .nav-link {
+        font-size: 1.1rem;
+        margin: 10px 0;
+        padding: 10px 14px;
+      }
+    }
+  }
+}
+
+/* Prevent body scroll when menu is open */
+body.menu-open {
+  overflow: hidden;
 }
