@@ -351,6 +351,9 @@
     
     #dish-image-info{
       flex-direction: column;
+      P{
+        font-size: 16px;
+      }
       
       #image-section{
         width: 100%;
@@ -379,6 +382,9 @@
       padding-right: 0;
     }
   }
+  }
+  #ad{
+    padding: 10px 10px 1px 10px !important;
   }
 }
 
@@ -430,6 +436,10 @@
         h2{
           font-size: 20px;
         }
+
+        p{
+          font-size: 16px;
+        }
         
         .info-details{
           padding: 18px 0;
@@ -472,7 +482,7 @@
     }
     
     #ad{
-      padding: 20px 0;
+      padding: 10px 10px 1px 10px;
     }
   }
 }
@@ -525,6 +535,9 @@
       #dish-info{
         border-radius: 15px;
         padding: 15px;
+        p{
+          font-size: 16px;
+        }
         
         h2{
           font-size: 18px;
@@ -588,7 +601,7 @@
     }
     
     #ad{
-      padding: 15px 0;
+      padding: 10px 10px 1px 10px;
       font-size: 14px;
     }
   }
