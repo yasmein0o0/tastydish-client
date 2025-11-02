@@ -1,12 +1,55 @@
-# React + Vite
+# Tasty Dish Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React/Redux frontend for a social recipe sharing and discovery platform.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[View Live Application](https://tastydish-client-4okn.vercel.app/)
 
-## Expanding the ESLint configuration
+## 🔗 Backend Repository
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The backend API for this project is located at:  
+[tasty-dish-backend](https://github.com/yasmein0o0/Biscmarket-server)
+
+## 📸 Screenshots
+
+![alt text](./public/image.png)
+![alt text](./public/image-1.png)
+![alt text](./public/image-2.png)
+![alt text](image-0.png)
+![alt text](image-01.png)
+![alt text](image-02.png)
+![alt text](image-03.png)
+![alt text](image-04.png)
+![alt text](image-05.png)
+![alt text](image-06.png)
+![alt text](image-07.png)
+![alt text](image-08.png)
+
+## 🛠️ Tech Stack
+
+### Frontend Technologies
+
+- **React** - Component-based UI framework
+- **Redux** - State management for user sessions and recipe data
+- **JavaScript (ES6+)** - Core programming language
+- **SASS** - Advanced CSS with variables and mixins for maintainable styling
+- **HTML5** - Semantic markup structure
+- **Axios** - HTTP client for API communication
+
+### Key Features Implemented
+
+- Recipe gallery with search and filtering capabilities
+- User authentication and profile management
+- Interactive recipe creation and editing forms
+- Favorite recipes collection system
+- Fully responsive design for all devices
+- JWT authentication flow with protected routes
+- Real-time search and category filtering
+
+## 🚦 Local Development Setup
+
+### Prerequisites
+
+- Node.js (v14 or higher)
+- npm
